@@ -16,26 +16,16 @@ import transactionRoutes from "../src/transaction/transaction.routes.js";
 import { userSeeder } from "../src/seeders/user.seeder.js";
 
 const middlewares = (app) => {
-  const allowedOrigins = [
-    "http://localhost:5173",
-    "https://deploy-front-bank.web.app"
-  ];
-
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
   app.use(helmet());
   app.use(cors({
-    origin: function(origin, callback) {
-      // Permite requests sin origen (como Postman o CURL)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        const msg = "El CORS policy no permite el acceso desde este origen.";
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
+    origin: "*",            
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
   }));
+  app.options("*", cors());
   app.use(morgan("dev"));
   app.use(cookieParser());
 };

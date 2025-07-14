@@ -23,11 +23,16 @@ const middlewares = (app) => {
 
   app.use(cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin) {
+        // Permitir solicitudes sin origen (ej. Postman)
         return callback(null, true);
-      } else {
-        return callback(new Error("No permitido por CORS"), false);
       }
+      if (allowedOrigins.includes(origin)) {
+        // Permitir solo orígenes en la lista y pasar el origen exacto
+        return callback(null, origin);
+      }
+      // Denegar otros orígenes
+      return callback(new Error("No permitido por CORS"), false);
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -35,12 +40,14 @@ const middlewares = (app) => {
   }));
 
   app.options("*", cors());
+
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
   app.use(helmet());
   app.use(morgan("dev"));
   app.use(cookieParser());
 };
+
 
 const routes = (app) => {
   app.use("/walletManager/v1/auth", authRoutes);

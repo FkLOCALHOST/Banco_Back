@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { getUserById, getUsersTransaction, getWallet, getBalance, getUsers, updatePassword, updateUser, deleteUser, getHistory, addFavorite, getFavorites } from "./user.controller.js";
 import { getUserByIdValidator, updatePasswordValidator, updateUserValidator, deleteUserValidator, addFavoriteValidator, getFavoritesValidator } from "../middlewares/user-validators.js";
-import { validateJWT } from "../middlewares/validate-token.js";
+import { validateTokenResponse } from "../middlewares/validate-token.js";
 const router = Router();
 
 /**
@@ -232,7 +232,7 @@ router.get(
 
 router.get(
     "/validateToken",
-    validateJWT
+    validateTokenResponse
 )
 
 export default router;

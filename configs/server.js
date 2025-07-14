@@ -14,6 +14,7 @@ import serviceRoutes from "../src/service/service.routes.js";
 import { swaggerDocs, swaggerUi } from "./swagger.js";
 import transactionRoutes from "../src/transaction/transaction.routes.js";
 import { userSeeder } from "../src/seeders/user.seeder.js";
+import cookieParser from "cookie-parser";
 
 const middlewares = (app) => {
   const allowedOrigins = [
@@ -24,14 +25,11 @@ const middlewares = (app) => {
   app.use(cors({
     origin: function (origin, callback) {
       if (!origin) {
-        // Permitir solicitudes sin origen (ej. Postman)
         return callback(null, true);
       }
       if (allowedOrigins.includes(origin)) {
-        // Permitir solo orígenes en la lista y pasar el origen exacto
         return callback(null, origin);
       }
-      // Denegar otros orígenes
       return callback(new Error("No permitido por CORS"), false);
     },
     credentials: true,
@@ -40,7 +38,7 @@ const middlewares = (app) => {
   }));
 
   app.options("*", cors());
-
+  app.use(cookieParser());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
   app.use(helmet());

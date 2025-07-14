@@ -9,19 +9,33 @@ import { connectionDB } from "./mongo.js";
 import authRoutes from "../src/auth/auth.routes.js";
 import userRoutes from "../src/user/user.routes.js";
 import walletRoutes from "../src/wallet/wallet.routes.js";
-import productRoutes from "../src/product/product.routes.js"
-import serviceRoutes from "../src/service/service.routes.js"
+import productRoutes from "../src/product/product.routes.js";
+import serviceRoutes from "../src/service/service.routes.js";
 import { swaggerDocs, swaggerUi } from "./swagger.js";
-import transactionRoutes from "../src/transaction/transaction.routes.js"
+import transactionRoutes from "../src/transaction/transaction.routes.js";
 import { userSeeder } from "../src/seeders/user.seeder.js";
 
 const middlewares = (app) => {
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "https://deploy-front-bank.web.app"
+  ];
+
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
   app.use(helmet());
-  app.use(cors({  origin: "http://localhost:5173",
-      credentials: true })
-    );
+  app.use(cors({
+    origin: function(origin, callback) {
+      // Permite requests sin origen (como Postman o CURL)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg = "El CORS policy no permite el acceso desde este origen.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true
+  }));
   app.use(morgan("dev"));
   app.use(cookieParser());
 };
@@ -44,7 +58,7 @@ const connectionMongo = async () => {
   try {
     await connectionDB();
   } catch (error) {
-    console.log(`Data Base connection is failed, please try again ${e}`);
+    console.log(`Data Base connection failed, please try again: ${error}`);
   }
 };
 
@@ -52,13 +66,13 @@ export const initServer = () => {
   const app = express();
   const timeInit = Date.now();
   try {
-    userSeeder()
+    userSeeder();
     middlewares(app);
     connectionMongo();
     routes(app);
     app.listen(process.env.PORT);
     const elapsedTime = Date.now() - timeInit;
-    console.log(`Server running on port ${process.env.PORT} ${elapsedTime}ms`);
+    console.log(`Server running on port ${process.env.PORT} (${elapsedTime}ms)`);
   } catch (error) {
     console.log(`Server failed to start: ${error}`);
   }

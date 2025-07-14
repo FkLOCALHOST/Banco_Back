@@ -20,7 +20,7 @@ const middlewares = (app) => {
     "http://localhost:5173",
     "https://deploy-front-bank.web.app"
   ];
-  
+
   app.use(cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
@@ -34,6 +34,7 @@ const middlewares = (app) => {
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
   }));
+  
   app.options("*", cors());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());

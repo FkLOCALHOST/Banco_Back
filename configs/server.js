@@ -14,38 +14,34 @@ import serviceRoutes from "../src/service/service.routes.js";
 import { swaggerDocs, swaggerUi } from "./swagger.js";
 import transactionRoutes from "../src/transaction/transaction.routes.js";
 import { userSeeder } from "../src/seeders/user.seeder.js";
-import cookieParser from "cookie-parser";
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://deploy-front-bank.web.app"
+];
 
 const middlewares = (app) => {
-  const allowedOrigins = [
-    "http://localhost:5173",
-    "https://deploy-front-bank.web.app"
-  ];
-
   app.use(cors({
     origin: function (origin, callback) {
-      if (!origin) {
-        return callback(null, true);
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true); // <-- PERMITIDO
       }
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, origin);
-      }
-      return callback(new Error("No permitido por CORS"), false);
+      return callback(new Error("No permitido por CORS"), false); // <-- RECHAZADO
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
   }));
 
+  // Para preflight (OPTIONS) de todas las rutas
   app.options("*", cors());
+
   app.use(cookieParser());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
   app.use(helmet());
   app.use(morgan("dev"));
-  app.use(cookieParser());
 };
-
 
 const routes = (app) => {
   app.use("/walletManager/v1/auth", authRoutes);
@@ -61,7 +57,7 @@ const connectionMongo = async () => {
   try {
     await connectionDB();
   } catch (error) {
-    console.log(`Data Base connection failed, please try again: ${error}`);
+    console.log(`Data Base connection failed: ${error}`);
   }
 };
 

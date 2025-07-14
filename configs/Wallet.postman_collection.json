@@ -1,0 +1,1509 @@
+{
+	"info": {
+		"_postman_id": "cbf46831-4151-4bb4-a3c3-33c8f9441fc0",
+		"name": "Wallet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38544176"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Javier\",\r\n    \"userName\": \"Zodiacal\",\r\n    \"dpi\": 101987654321,\r\n    \"address\": \"Zona 7, Guatemala\",\r\n    \"phone\": \"55885335\",\r\n    \"email\": \"javierherrera5513@gmail.com\",\r\n    \"password\": \"Aurorita0306@\",\r\n    \"workName\": \"Ingeniero en sistemas\",\r\n    \"monthEarnings\": 3600\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"javierherrera5513@gmail.com\",\r\n    \"password\": \"Aurorita0306@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/getUser",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"getUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/getBalance/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"getBalance",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "6848c1e79891c6cda01fc2ff"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/getHistoryOfTransactions/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"getHistoryOfTransactions",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "6841081fc990836df7f396bc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/getUserById/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"getUserById",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzIxY2UwYjVjMzUyNzJkZWMyOTgiLCJpYXQiOjE3NDk1MTg4NjYsImV4cCI6MTc0OTUyMjQ2Nn0.TUxZZLtO-d2Ndr8fGVUsxZaH2Ox53RuyoxhDx6YvMt0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"Sabado12@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/updatePassword/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"updatePassword",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Joshep\",\r\n    \"address\": \"Avenida Elena\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/updateUser/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"updateUser",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "6848c1e79891c6cda01fc2ff"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/deleteUser/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"deleteUser",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/getHistoryOfTransactions/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"getHistoryOfTransactions",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "6841081fc990836df7f396bc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AgregarCuentaFav",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk3NzI3OTcsImV4cCI6MTc0OTc3NjM5N30.m0zONYK2gECnGTOF47NMJFVnGUaKgoUCMJNnpjM-ToA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumber\": 3243234\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/addFavorite",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"addFavorite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerCuentasFav",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk3NzI3OTcsImV4cCI6MTc0OTc3NjM5N30.m0zONYK2gECnGTOF47NMJFVnGUaKgoUCMJNnpjM-ToA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/Favorites",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"Favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/user/getBalance/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"user",
+								"getBalance",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "6848c1e79891c6cda01fc2ff"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wallet",
+			"item": [
+				{
+					"name": "Generate Wallet",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"6848c1e79891c6cda01fc2ff\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/wallet/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"wallet",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "add Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"receiver\": \"6841081fc990836df7f396bc\", // Id de usuario (no wallet)\r\n  \"sender\": \"6848c1e79891c6cda01fc2ff\", //Id de usuario (no wallet)\r\n  \"amount\": 300,\r\n  \"typeSend\": \"monetary\",\r\n  \"typeRecive\": \"foreing\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/transaction/createTransaction",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"transaction",
+								"createTransaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Transaction",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ4YzFlNzk4OTFjNmNkYTAxZmMyZmYiLCJpYXQiOjE3NTEyMzk2NTUsImV4cCI6MTc1MTI0MzI1NX0.nu5wd3jqRo3rmNFVLPo093vEhXJUsqZ6mNGyQZXNWO4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/transaction/getTransacionHistory/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"transaction",
+								"getTransacionHistory",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "6841081fc990836df7f396bc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Deposit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"receiver\": \"6841081fc990836df7f396bc\",\r\n  \"sender\": \"6848c1e79891c6cda01fc2ff\",\r\n  \"amount\": 600,\r\n  \"typeRecive\": \"monetary\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/transaction/depositTransaction",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"transaction",
+								"depositTransaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Revertir Transacción",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/transaction/revertTransaction/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"transaction",
+								"revertTransaction",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "684765f099093a72d7a2df8c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Deposit",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": \"300\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/transaction/updateDeposit/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"transaction",
+								"updateDeposit",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "684daacdfb7f22a4623c4ef1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Transaction",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": \" 500\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/transaction/updateTransaction/:uid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"transaction",
+								"updateTransaction",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "684db7537cd6ea20607eba71"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Agregar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk1MTk2NjYsImV4cCI6MTc0OTUyMzI2Nn0.9eYWtDcyiWUKv2QfR2iw4aSs2_WhJHIFLBD-vuRY880",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Zapatos gusiii\",\r\n    \"description\" : \"Pero que maldito teni\",\r\n    \"price\": 100.00,\r\n    \"category\": \"Ropa\",\r\n    \"stock\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/product/agregar",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"product",
+								"agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarProductos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/product/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk1MTk2NjYsImV4cCI6MTc0OTUyMzI2Nn0.9eYWtDcyiWUKv2QfR2iw4aSs2_WhJHIFLBD-vuRY880",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Zapato gusii\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/product/actualizar/68477cec2832c31aa5d0c5e8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"product",
+								"actualizar",
+								"68477cec2832c31aa5d0c5e8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk1MTk2NjYsImV4cCI6MTc0OTUyMzI2Nn0.9eYWtDcyiWUKv2QfR2iw4aSs2_WhJHIFLBD-vuRY880",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/product/buscar/gusi",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"product",
+								"buscar",
+								"gusi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Desactivar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk1MTk2NjYsImV4cCI6MTc0OTUyMzI2Nn0.9eYWtDcyiWUKv2QfR2iw4aSs2_WhJHIFLBD-vuRY880",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/product/desactivar/68477cec2832c31aa5d0c5e8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"product",
+								"desactivar",
+								"68477cec2832c31aa5d0c5e8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asignar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk4NjY4MjksImV4cCI6MTc0OTg3MDQyOX0.1OvXtUl3AGqDPISAnI7K20i4Xph9SIVLdSVG8qIcWio",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"684b674ccb0fced95fe75a6d\",\r\n    \"productId\": \"68478cd1e48fed8b971fb5c4\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/product/asignar",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"product",
+								"asignar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarProductoUsuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk4NjY4MjksImV4cCI6MTc0OTg3MDQyOX0.1OvXtUl3AGqDPISAnI7K20i4Xph9SIVLdSVG8qIcWio",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"684b674ccb0fced95fe75a6d\",\r\n    \"productId\": \"68477cec2832c31aa5d0c5e8\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/product/eliminar",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"product",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerProductosUsuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk4NjY4MjksImV4cCI6MTc0OTg3MDQyOX0.1OvXtUl3AGqDPISAnI7K20i4Xph9SIVLdSVG8qIcWio",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/product/usuario/684b674ccb0fced95fe75a6d",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"product",
+								"usuario",
+								"684b674ccb0fced95fe75a6d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "Agregar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk1MTk2NjYsImV4cCI6MTc0OTUyMzI2Nn0.9eYWtDcyiWUKv2QfR2iw4aSs2_WhJHIFLBD-vuRY880",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Funerales FigueroaAA\",\r\n    \"description\": \"Figueroaaaaaaaaaaaaaaaaaaaaaa\",\r\n    \"price\": 1000.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/service/agregar",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"service",
+								"agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk1MTk2NjYsImV4cCI6MTc0OTUyMzI2Nn0.9eYWtDcyiWUKv2QfR2iw4aSs2_WhJHIFLBD-vuRY880",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Funerales Habemus\",\r\n    \"description\": \"Figueroaaaaaaaaaaaaaaaaaaaa\",\r\n    \"price\": 1011.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/service/actualizar/6847860d6d97bf6da8eb2f7a",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"service",
+								"actualizar",
+								"6847860d6d97bf6da8eb2f7a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/service/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"service",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk1MTk2NjYsImV4cCI6MTc0OTUyMzI2Nn0.9eYWtDcyiWUKv2QfR2iw4aSs2_WhJHIFLBD-vuRY880",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/service/buscar/r",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"service",
+								"buscar",
+								"r"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Desactivar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk1MTk2NjYsImV4cCI6MTc0OTUyMzI2Nn0.9eYWtDcyiWUKv2QfR2iw4aSs2_WhJHIFLBD-vuRY880",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/service/desactivar/6847860d6d97bf6da8eb2f7a",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"service",
+								"desactivar",
+								"6847860d6d97bf6da8eb2f7a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asignar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk4NzA0OTMsImV4cCI6MTc0OTg3NDA5M30.PvnURaDqyD4dLDKjoyK8VqQtlzp5p2vAUamRuYTDkWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"684b674ccb0fced95fe75a6d\",\r\n    \"serviceId\": \"6847860d6d97bf6da8eb2f7a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/service/asignar",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"service",
+								"asignar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar asignacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk4NzA0OTMsImV4cCI6MTc0OTg3NDA5M30.PvnURaDqyD4dLDKjoyK8VqQtlzp5p2vAUamRuYTDkWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"684b674ccb0fced95fe75a6d\",\r\n    \"serviceId\": \"6847860d6d97bf6da8eb2f7a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/service/eliminar",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"service",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VerAsignaciones",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODQ3NzdiOWRiNmY3MzA1ODMzMTBkYmMiLCJpYXQiOjE3NDk4NzA0OTMsImV4cCI6MTc0OTg3NDA5M30.PvnURaDqyD4dLDKjoyK8VqQtlzp5p2vAUamRuYTDkWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/walletManager/v1/service/usuario/684b674ccb0fced95fe75a6d",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"walletManager",
+								"v1",
+								"service",
+								"usuario",
+								"684b674ccb0fced95fe75a6d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

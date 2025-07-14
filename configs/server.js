@@ -23,8 +23,7 @@ const middlewares = (app) => {
 
   app.use(cors({
     origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       } else {
         return callback(new Error("No permitido por CORS"), false);
@@ -34,7 +33,7 @@ const middlewares = (app) => {
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
   }));
-  
+
   app.options("*", cors());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
@@ -43,7 +42,6 @@ const middlewares = (app) => {
   app.use(cookieParser());
 };
 
-
 const routes = (app) => {
   app.use("/walletManager/v1/auth", authRoutes);
   app.use("/walletManager/v1/user", userRoutes);
@@ -51,11 +49,7 @@ const routes = (app) => {
   app.use("/walletManager/v1/product", productRoutes);
   app.use("/walletManager/v1/service", serviceRoutes);
   app.use("/walletManager/v1/transaction", transactionRoutes);
-  app.use(
-    "/walletManager/v1/docs",
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerDocs)
-  );
+  app.use("/walletManager/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 };
 
 const connectionMongo = async () => {

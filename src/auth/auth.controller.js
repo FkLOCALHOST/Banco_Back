@@ -5,9 +5,8 @@ import { generateJWT } from "../helpers/generate-jwr.js";
 export const register = async (req, res) => {
   try {
     const data = req.body;
+    data.password = await hash(data.password);
 
-    const encryptedPass = await hash(data.password);
-    data.password = encryptedPass;
     if (data.monthEarnings < 100) {
       return res.status(400).json({
         message: "User registration failed, insufficient funds",
@@ -17,28 +16,23 @@ export const register = async (req, res) => {
     const user = await User.create(data);
     const token = await generateJWT(user.id);
 
-    res.cookie(
-      "auth",
-      { token, role: user.role },
-      {
-        httpOnly: false,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 60 * 60 * 1000,
-      }
-    );
+    res.cookie("auth_token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 60 * 60 * 1000,
+    });
 
     return res.status(201).json({
       message: "User has been created",
       userDetails: {
         id: user._id,
-        token: token,
         role: user.role,
       },
     });
   } catch (error) {
     return res.status(500).json({
-      message: "user registration failed",
+      message: "User registration failed",
       error: error.message,
     });
   }
@@ -54,46 +48,38 @@ export const login = async (req, res) => {
     if (!user) {
       return res.status(400).json({
         message: "Credenciales inválidas",
-        error: "no existe el usuario o crreo electrónico",
+        error: "No existe el usuario o correo electrónico",
       });
     }
 
     const validPassword = await verify(user.password, password);
-
     if (!validPassword) {
       return res.status(400).json({
-        message: "Credenciale inválidas",
+        message: "Credenciales inválidas",
         error: "Contraseña incorrecta",
       });
     }
 
     const token = await generateJWT(user.id);
 
-    const userData = {
-      id: user._id,
-      userName: user.userName,
-      token: token,
-    };
-
-    res.cookie("User", JSON.stringify(userData), {
-      httpOnly: false,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Lax",
+    res.cookie("auth_token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
       maxAge: 60 * 60 * 1000,
     });
 
     return res.status(200).json({
-      message: "Login succeful",
+      message: "Login successful",
       userDetails: {
         id: user._id,
-        token: token,
+        userName: user.userName,
       },
     });
   } catch (err) {
     return res.status(500).json({
-      message: "login failed, server Error",
+      message: "Login failed, server error",
       error: err.message,
     });
   }
 };
-

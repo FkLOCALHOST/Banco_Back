@@ -17,7 +17,7 @@ import { userSeeder } from "../src/seeders/user.seeder.js";
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://deploy-front-bank.web.app"
+  "https://bank-testing-production.web.app"
 ];
 
 const middlewares = (app) => {

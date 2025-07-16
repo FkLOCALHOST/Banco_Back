@@ -320,7 +320,7 @@ export const getWallet = async (req, res) => {
 
 export const getUsersTransaction = async (req, res) => {
   try {
-    const { limite = 5, desde = 0 } = req.query;
+    const { limite = 50, desde = 0 } = req.query;
     const query = { status: true };
 
     const [total, users] = await Promise.all([

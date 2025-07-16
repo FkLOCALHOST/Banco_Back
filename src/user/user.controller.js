@@ -29,7 +29,7 @@ export const getUserById = async (req, res) => {
 
 export const getUsers = async (req, res) => {
   try {
-    const { limite = 5, desde = 0 } = req.query;
+    const { limite = 50, desde = 0 } = req.query;
     const query = { status: true };
 
     const [total, users] = await Promise.all([
@@ -141,7 +141,7 @@ export const deleteUser = async (req, res) => {
 
 export const getHistory = async (req, res) => {
   try {
-    const { limite = 5, desde = 0 } = req.query;
+    const { limite = 50, desde = 0 } = req.query;
     const query = { status: true };
 
     const [total, users] = await Promise.all([

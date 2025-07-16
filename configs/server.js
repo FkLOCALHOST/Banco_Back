@@ -20,22 +20,22 @@ const allowedOrigins = [
   "https://bank-front-deploy.web.app"
 ];
 
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("No permitido por CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+};
+
 const middlewares = (app) => {
-  app.use(cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true); // <-- PERMITIDO
-      }
-      return callback(new Error("No permitido por CORS"), false); // <-- RECHAZADO
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-  }));
-
-  // Para preflight (OPTIONS) de todas las rutas
-  app.options("*", cors());
-
+  app.use(cors(corsOptions));
+  app.options("*", cors(corsOptions));
   app.use(cookieParser());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());

@@ -223,7 +223,7 @@ export const revertTransaction = async (req, res) => {
 
 export const getTransacionHistory = async (req, res) => {
     try {
-        const { limite = 5, desde = 0 } = req.query;
+        const { limite = 100, desde = 0 } = req.query;
         const query = { status: true };
 
         const total = await User.countDocuments(query);

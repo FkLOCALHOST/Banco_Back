@@ -58,6 +58,7 @@ export const addService = async (req, res) => {
 
     const service = new Service(data);
     await service.save();
+
     const noAccount = await numberVerificationAccount("monetary");
     const savingAccount = await numberVerificationAccount("saving");
     const foreingCurrency = await numberVerificationAccount("foreing");
@@ -65,10 +66,14 @@ export const addService = async (req, res) => {
       noAccount,
       savingAccount,
       foreingCurrency,
-      service: service._id, // Cambia aquí
+      service: service._id,
     };
 
     const wallet = await Wallet.create(walletData);
+
+    service.wallet = wallet._id;
+    await service.save();
+
     return res.status(200).json({
       success: true,
       message: "Service and wallet created successfully",

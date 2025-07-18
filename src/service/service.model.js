@@ -24,7 +24,12 @@ const serviceSchema = Schema({
     },
     image: {
         type: String
-    }
+    },
+    wallet: {
+        type: Schema.Types.ObjectId,
+        ref: "Wallet",
+        default: null
+    },
 },
 {
     versionKey: false,

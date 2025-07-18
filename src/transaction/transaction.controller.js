@@ -6,8 +6,17 @@ import { validateTransactionDayLimit } from "../helpers/transaction-limitator.js
 import { convert } from "../converter/converter.controller.js";
 
 const findReceiverUser = async (receiver) => {
-    const accountNumber = Number(receiver);
+    if (typeof receiver === "string" && receiver.includes("@")) {
+        const user = await User.findOne({ email: receiver });
+        if (user) return user;
+    }
 
+    if (typeof receiver === "string" && mongoose.Types.ObjectId.isValid(receiver)) {
+        const user = await User.findById(receiver);
+        if (user) return user;
+    }
+
+    const accountNumber = Number(receiver);
     if (!isNaN(accountNumber) && accountNumber > 0) {
         const wallet = await Wallet.findOne({
             $or: [
@@ -23,18 +32,9 @@ const findReceiverUser = async (receiver) => {
         }
     }
 
-    if (mongoose.Types.ObjectId.isValid(receiver)) {
-        const user = await User.findById(receiver);
-        if (user) return user;
-    }
-
-    if (typeof receiver === "string" && receiver.includes("@")) {
-        const user = await User.findOne({ email: receiver });
-        if (user) return user;
-    }
-
     return null;
 };
+
 
 export const createTransaction = async (req, res) => {
     try {

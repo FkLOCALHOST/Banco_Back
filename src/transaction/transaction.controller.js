@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 import Transaction from "./transaction.model.js";
 import User from "../user/user.model.js";
 import Wallet from "../wallet/wallet.model.js";
-import Service from "../service/service.model.js"
 import { validateTransactionDayLimit } from "../helpers/transaction-limitator.js";
 import { convert } from "../converter/converter.controller.js";
+import Service from "../service/service.model.js";
 
 const findReceiverUser = async (receiver) => {
     if (typeof receiver === "string" && receiver.includes("@")) {
@@ -27,7 +27,12 @@ const findReceiverUser = async (receiver) => {
             ]
         });
 
-        return wallet._id
+        if (wallet) {
+            const user = await User.findOne({ wallet: wallet._id });
+            if (user !== null) return user;
+            const service = await Service.findOne({ wallet: wallet._id });
+            if (service) return service;
+        }
     }
 
     return null;

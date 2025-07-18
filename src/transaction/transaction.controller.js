@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import Transaction from "./transaction.model.js";
 import User from "../user/user.model.js";
 import Wallet from "../wallet/wallet.model.js";
+import Service from "../service/service.model.js"
 import { validateTransactionDayLimit } from "../helpers/transaction-limitator.js";
 import { convert } from "../converter/converter.controller.js";
 
@@ -17,7 +18,7 @@ const findReceiverUser = async (receiver) => {
     }
 
     const accountNumber = Number(receiver);
-    if (!isNaN(accountNumber) && accountNumber > 0) {
+    if (accountNumber > 0) {
         const wallet = await Wallet.findOne({
             $or: [
                 { noAccount: accountNumber },
@@ -29,6 +30,8 @@ const findReceiverUser = async (receiver) => {
         if (wallet) {
             const user = await User.findOne({ wallet: wallet._id });
             if (user) return user;
+            const service = await Service.findOne({ wallet: wallet._id });
+            if (service) return service;
         }
     }
 

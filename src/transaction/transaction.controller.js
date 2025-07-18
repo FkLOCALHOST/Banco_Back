@@ -27,12 +27,7 @@ const findReceiverUser = async (receiver) => {
             ]
         });
 
-        if (wallet) {
-            const user = await User.findOne({ wallet: wallet._id });
-            if (user) return user;
-            const service = await Service.findOne({ wallet: wallet._id });
-            if (service) return service;
-        }
+        return wallet._id
     }
 
     return null;

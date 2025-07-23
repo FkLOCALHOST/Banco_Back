@@ -199,14 +199,36 @@ export const revertTransaction = async (req, res) => {
         const senderWallet = await Wallet.findById(senderUser.wallet);
         const receiverWallet = await Wallet.findById(receiverUser.wallet);
 
+        // Calcular los montos para la reversión considerando conversiones
+        let decrementAmountReceiver = transaction.amount;
+        let incrementAmountSender = transaction.amount;
+
+        // Si la transacción original involucró conversión USD -> GTQ
+        if (accountSender === "foreingCurrencyBalance" && accountReceiver !== "foreingCurrencyBalance") {
+            const conversion = await convert(transaction.amount, "USD", "GTQ");
+            if (conversion.error) {
+                return res.status(500).json({ success: false, message: "Error al convertir de USD a GTQ para la reversión" });
+            }
+            decrementAmountReceiver = parseInt(conversion.result);
+        }
+
+        // Si la transacción original involucró conversión GTQ -> USD
+        if (accountReceiver === "foreingCurrencyBalance" && accountSender !== "foreingCurrencyBalance") {
+            const conversion = await convert(transaction.amount, "GTQ", "USD");
+            if (conversion.error) {
+                return res.status(500).json({ success: false, message: "Error al convertir de GTQ a USD para la reversión" });
+            }
+            decrementAmountReceiver = parseInt(conversion.result);
+        }
+
         await Transaction.findByIdAndUpdate(uid, { status: "REVERTED" });
 
         await Promise.all([
             Wallet.findByIdAndUpdate(receiverWallet._id, {
-                $inc: { [accountReceiver]: -transaction.amount }
+                $inc: { [accountReceiver]: -decrementAmountReceiver }
             }),
             Wallet.findByIdAndUpdate(senderWallet._id, {
-                $inc: { [accountSender]: transaction.amount }
+                $inc: { [accountSender]: incrementAmountSender }
             })
         ]);
 
